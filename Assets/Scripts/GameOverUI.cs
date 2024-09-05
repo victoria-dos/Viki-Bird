@@ -10,7 +10,7 @@ public class GameOverUI : MonoBehaviour
     void Start()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
-        m_TextMeshPro.text = "Game over. Your score is " + gameManager.score.ToString();
+        m_TextMeshPro.text = "Game over.\nYour score is " + gameManager.score.ToString() + "\n" + "Best score is " + PlayerPrefs.GetInt("bestScore", 0).ToString();
     }
 
     // Update is called once per frame

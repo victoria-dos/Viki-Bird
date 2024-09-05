@@ -40,6 +40,12 @@ public class Player : MonoBehaviour
         Debug.Log("Game over. Your score is " + counter);
         GameManager gameManager = FindObjectOfType<GameManager>();
         gameManager.score = counter;
+        int bestScore = PlayerPrefs.GetInt("bestScore", 0);
+
+        if (bestScore < counter)
+        {
+            PlayerPrefs.SetInt("bestScore", counter);
+        }
         SceneManager.LoadScene(1);
     }
 
