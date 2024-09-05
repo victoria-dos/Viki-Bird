@@ -7,6 +7,12 @@ public class Pipe : MonoBehaviour
     [SerializeField]
     private float offsetX = 0.1f;
 
+    void Start()
+    {
+        float tmp = Random.Range(2f, 10f);
+        transform.position = new Vector3(transform.position.x, tmp, 0);
+    }
+
 
     // Update is called once per frame
     void Update()

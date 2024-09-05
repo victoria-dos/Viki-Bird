@@ -37,16 +37,27 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Game over. Your score is " + counter);
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        gameManager.score = counter;
+        
+        GameManager gameManager = GameManager.Instance;
+        gameManager.lives -= 1;
+        Debug.Log(gameManager.lives + " lives reamining");
+        gameManager.score += counter;
         int bestScore = PlayerPrefs.GetInt("bestScore", 0);
 
-        if (bestScore < counter)
+        if (gameManager.lives == 0)
         {
-            PlayerPrefs.SetInt("bestScore", counter);
+            if (bestScore < gameManager.score)
+            {
+                PlayerPrefs.SetInt("bestScore", gameManager.score);
+            }
+            Debug.Log("Game over. Your score is " + gameManager.score);
+            SceneManager.LoadScene(1);
         }
-        SceneManager.LoadScene(1);
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
